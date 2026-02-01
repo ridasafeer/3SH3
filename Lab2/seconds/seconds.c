@@ -89,13 +89,13 @@ ssize_t proc_read(struct file *file, char __user *usr_buf, size_t count, loff_t 
 
         //Calculation for time elapsed using jiffies and HZ rate the timer interrupt runs on
         long now = jiffies;
-        long elapsedJiffies = now - timeAdded;
+        long elapsedJiffies = now - jiffiesAdded;
 
         //Conversion of elapsed jiffies into seconds via HZ machine variable
         long elapsedSeconds = elapsedJiffies/HZ;
 
         //Formats value into string for later printing to console user space
-        rv = sprintf(buffer, "%lu\n", elapsedSeconds);
+        rv = sprintf(buffer, "Seconds elapsed since seconds module loaded to kernel: %lu\n", elapsedSeconds);
 
         //Copies the contents of buffer to userspace usr_buf
         copy_to_user(usr_buf, buffer, rv);
